@@ -542,6 +542,8 @@ function saveCustomRaces(arr) { localStorage.setItem("tbh-custom-races", JSON.st
 
 const cardFilters = { faction:"all", type:"all", rarity:"all" };
 let cardSearchQuery   = "";
+let cardSortKey       = "default";
+let cardSortAsc       = true;
 let cardCenterRendered = false;
 
 /* ═══════════════════════════════════════════════════════════
@@ -645,8 +647,9 @@ async function getMergedCards() {
 }
 
 async function getFilteredCards() {
+  const rarityOrder = { Common:0, Rare:1, Epic:2, Legendary:3 };
   const all = await getMergedCards();
-  return all.filter((c) => {
+  const filtered = all.filter((c) => {
     if (cardFilters.faction !== "all" && c.faction !== cardFilters.faction) return false;
     if (cardFilters.type    !== "all" && c.type.toLowerCase() !== cardFilters.type) return false;
     if (cardFilters.rarity  !== "all" && c.rarity.toLowerCase() !== cardFilters.rarity) return false;
@@ -655,6 +658,18 @@ async function getFilteredCards() {
       if (!(c.zh||"").toLowerCase().includes(q) && !(c.en||"").toLowerCase().includes(q)) return false;
     }
     return true;
+  });
+  if (cardSortKey === "default") return filtered;
+  return filtered.sort((a, b) => {
+    let va, vb;
+    if (cardSortKey === "rarity") {
+      va = rarityOrder[a.rarity] ?? 0;
+      vb = rarityOrder[b.rarity] ?? 0;
+    } else if (cardSortKey === "cost") {
+      va = (a.cost === "hero" || a.cost == null) ? -1 : Number(a.cost);
+      vb = (b.cost === "hero" || b.cost == null) ? -1 : Number(b.cost);
+    }
+    return cardSortAsc ? va - vb : vb - va;
   });
 }
 
@@ -919,6 +934,14 @@ function initCardCenter() {
   renderCustomCardsList();
   document.querySelector("#cardSearch").addEventListener("input", (e) => {
     cardSearchQuery = e.target.value.trim(); renderCardGrid();
+  });
+  document.querySelector("#cardSortKey").addEventListener("change", (e) => {
+    cardSortKey = e.target.value; renderCardGrid();
+  });
+  document.querySelector("#cardSortDir").addEventListener("click", (e) => {
+    cardSortAsc = !cardSortAsc;
+    e.target.textContent = cardSortAsc ? "↑" : "↓";
+    renderCardGrid();
   });
   document.querySelector("#cardCreateBtn").addEventListener("click", () => openCardEditor(null));
   document.querySelector("#customCardsList").addEventListener("click", (e) => {

@@ -393,6 +393,15 @@
         <!-- 工具栏 -->
         <div class="card-toolbar">
           <input type="text" id="cardSearch" placeholder="搜索卡牌名称 / Search cards..." class="card-search-input" />
+          <div class="card-sort-row">
+            <span class="card-filter-label">排序</span>
+            <select id="cardSortKey" class="card-sort-select">
+              <option value="default">默认</option>
+              <option value="rarity">稀有度</option>
+              <option value="cost">费用</option>
+            </select>
+            <button id="cardSortDir" class="card-sort-dir-btn" type="button" title="切换排序方向">↑</button>
+          </div>
           <span class="card-count-label" id="cardCountLabel"></span>
         </div>
 
