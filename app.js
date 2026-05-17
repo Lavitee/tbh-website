@@ -685,7 +685,7 @@ async function renderCardGrid() {
       </div>` : (arrowDisplay ? `<div class="game-card-stats"><span class="gc-arrows">${arrowDisplay}</span></div>` : "");
     return `
       <div class="game-card ${c._isCustom?"is-custom":""} ${c._isEdited?"is-edited":""}"
-           style="--card-accent:${meta.accent}" data-card-id="${c._id}">
+           style="--card-accent:${meta.accent}" data-card-id="${c._id}" data-rarity="${c.rarity}">
         <button class="game-card-edit-btn" data-edit-id="${c._id}" type="button" title="编辑">✏</button>
         <div class="game-card-header">
           <div class="game-card-names">
