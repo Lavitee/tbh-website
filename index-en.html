@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Time-Block Hero | World Concept Archive</title>
+    <meta
+      name="description"
+      content="A sci-fi anime world archive for Time-Block Hero, including story timeline, faction concepts, and character dossiers."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Time-Block Hero home">
+        <span class="brand-mark">TBH</span>
+        <span>
+          <strong>TIME-BLOCK HERO</strong>
+          <small>World Archive</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Page navigation">
+        <a href="#timeline">Story</a>
+        <a href="#factions">Factions</a>
+        <a href="#characters">Characters</a>
+        <a href="../Docs/TimeBlock_World_Bible_EN.md">World Bible</a>
+        <a href="./index.html">中文</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero-section" aria-labelledby="hero-title">
+        <img class="hero-art" src="./assets/generated/hero-main.png" alt="" />
+        <div class="hero-vignette"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">Future Sci-Fi Anime Card Game</p>
+          <h1 id="hero-title">TIME-BLOCK HERO</h1>
+          <p class="hero-line">After stealing time from a god, humanity finally heard the universe ask to be repaid.</p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#timeline">Read Timeline</a>
+            <a class="secondary-link" href="#characters">View Dossiers</a>
+          </div>
+        </div>
+        <aside class="hero-status" aria-label="World status">
+          <span>Main Era 2460</span>
+          <strong>The Rift Reopens</strong>
+          <p>The time-quota system has held for a century, but new distortions are spreading in silence.</p>
+        </aside>
+      </section>
+
+      <section class="section intro-grid" aria-label="Core setting">
+        <article>
+          <span class="section-kicker">CORE</span>
+          <h2>A Stasis Field does not stop time. It borrows against the fourth dimension.</h2>
+        </article>
+        <article class="glass-panel">
+          <h3>The Crowned Chronarch</h3>
+          <p>A higher god beyond four-dimensional space. It grants local time acceleration, while every field leaves a scar behind reality.</p>
+        </article>
+        <article class="glass-panel">
+          <h3>Black Noon Fission</h3>
+          <p>In 2350, accumulated time-debt tore open the Timeless Sea. Cities aged a century in one second, and humanity lost 80% of its population.</p>
+        </article>
+      </section>
+
+      <section id="timeline" class="section timeline-section" aria-labelledby="timeline-title">
+        <div class="section-heading">
+          <span class="section-kicker">STORYLINE</span>
+          <h2 id="timeline-title">Three Centuries After Zero Second</h2>
+          <p>Click each timeline preview to read the key story of that era.</p>
+        </div>
+        <div class="timeline-shell">
+          <div class="timeline-track" id="timelineTrack" aria-label="Story timeline"></div>
+        </div>
+        <article class="detail-panel" id="timelineDetail" aria-live="polite"></article>
+      </section>
+
+      <section id="factions" class="section factions-section" aria-labelledby="factions-title">
+        <div class="section-heading">
+          <span class="section-kicker">FACTIONS</span>
+          <h2 id="factions-title">Civilizations After the Cataclysm</h2>
+          <p>Order, evolution, faith, freedom, and circulation became humanity's five roads forward.</p>
+        </div>
+        <div class="faction-tabs" id="factionTabs" aria-label="Faction switcher"></div>
+        <div class="faction-feature" id="factionFeature"></div>
+      </section>
+
+      <section id="characters" class="section characters-section" aria-labelledby="characters-title">
+        <div class="section-heading">
+          <span class="section-kicker">DOSSIERS</span>
+          <h2 id="characters-title">Character Dossiers</h2>
+          <p>Twenty characters anchor the factions, hidden storylines, and future card designs.</p>
+        </div>
+        <div class="character-filters" id="characterFilters" aria-label="Character filters"></div>
+        <div class="character-layout">
+          <div class="character-list" id="characterList" aria-label="Character list"></div>
+          <article class="character-detail" id="characterDetail" aria-live="polite"></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Time-Block Hero Concept Archive</span>
+      <a href="../Docs/TimeBlock_World_Bible_EN.md">Open World Bible</a>
+    </footer>
+
+    <script src="./app-en.js"></script>
+  </body>
+</html>
