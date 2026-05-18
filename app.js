@@ -593,7 +593,7 @@ async function ghFetch() {
     const json = await res.json();
     _ghSha = json.sha;
     const data = JSON.parse(decodeURIComponent(atob(json.content.replace(/\n/g, "")).split("").map(c => "%" + c.charCodeAt(0).toString(16).padStart(2, "0")).join("")));
-    _cardCache = { customCards: data.customCards || [], overrides: data.overrides || {} };
+    _cardCache = { customCards: data.customCards || [], overrides: data.overrides || {}, cardImages: data.cardImages || {} };
     setSyncStatus("✓ 数据已同步", "success");
     return _cardCache;
   } catch (e) {
@@ -683,12 +683,12 @@ function getCardImage(id) {
 }
 
 function getCardImageUrl(id) {
-  // 返回 GitHub raw URL，用于展示
+  // 先查本地缓存（刚上传还没写入 cards.json 时）
   const cached = localStorage.getItem(`tbh-card-img-${id}`);
-  if (cached) return cached; // 本地缓存（尚未同步或刚上传）
-  const synced = localStorage.getItem(`tbh-card-img-synced-${id}`);
-  if (synced === "1") {
-    return `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/main/data/images/card-${id}.jpg?t=${Date.now()}`;
+  if (cached) return cached;
+  // 再查 cards.json 里的 URL（所有人都能看到）
+  if (_cardCache && _cardCache.cardImages && _cardCache.cardImages[id]) {
+    return _cardCache.cardImages[id];
   }
   return null;
 }
@@ -730,7 +730,16 @@ async function saveCardImage(id, dataUrl) {
     // 标记已同步，清除本地 base64（节省空间）
     localStorage.setItem(`tbh-card-img-synced-${id}`, "1");
     localStorage.removeItem(`tbh-card-img-${id}`);
+
+    // 把图片 URL 存进 cards.json，这样所有人都能看到
+    const imageUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/main/data/images/card-${id}.jpg`;
+    const data = await ghFetch();
+    if (!data.cardImages) data.cardImages = {};
+    data.cardImages[id] = imageUrl;
+    await ghSave(data);
+
     setSyncStatus("✓ 图片已同步", "success");
+    renderCardGrid();
   } catch (e) {
     setSyncStatus(`✗ 图片上传失败，已存在本地 (${e.message})`, "error");
   }
