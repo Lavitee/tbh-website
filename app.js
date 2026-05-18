@@ -635,6 +635,7 @@ async function getCustomCards()      { return (await ghFetch()).customCards; }
 async function saveCustomCards(arr)  { await ghSave({ ...(await ghFetch()), customCards: arr }); }
 async function getCardOverrides()    { return (await ghFetch()).overrides; }
 async function saveCardOverrides(obj){ await ghSave({ ...(await ghFetch()), overrides: obj }); }
+async function getCardImages()       { return (await ghFetch()).cardImages || {}; }
 
 async function getMergedCards() {
   const [overrides, customs] = await Promise.all([getCardOverrides(), getCustomCards()]);
@@ -733,8 +734,9 @@ async function saveCardImage(id, dataUrl) {
 
     // 把图片 URL 存进 cards.json，这样所有人都能看到
     const imageUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/main/data/images/card-${id}.jpg`;
+    _cardCache = null; // 清空缓存，强制重新拉取
     const data = await ghFetch();
-    if (!data.cardImages) data.cardImages = {};
+    data.cardImages = data.cardImages || {};
     data.cardImages[id] = imageUrl;
     await ghSave(data);
 
