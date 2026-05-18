@@ -677,6 +677,235 @@ async function getFilteredCards() {
 function getCardImage(id) { return localStorage.getItem(`tbh-card-img-${id}`) || null; }
 function saveCardImage(id, dataUrl) { localStorage.setItem(`tbh-card-img-${id}`, dataUrl); }
 
+/* 图片裁剪编辑器 */
+let _cropCardId  = null;
+let _cropScale   = 1;
+let _cropX       = 0;
+let _cropY       = 0;
+let _cropDragging = false;
+let _cropDragStartX = 0;
+let _cropDragStartY = 0;
+let _cropNaturalW = 0;
+let _cropNaturalH = 0;
+
+const CARD_W = 300;  // 裁剪区宽度
+const CARD_H = 400;  // 裁剪区高度
+
+function openCropEditor(cardId, file, cardData) {
+  _cropCardId = cardId;
+  const url = URL.createObjectURL(file);
+  const overlay  = document.querySelector("#imgCropOverlay");
+  const img      = document.querySelector("#cropImg");
+  const viewport = document.querySelector("#cropViewport");
+  const slider   = document.querySelector("#cropScale");
+
+  // 填入卡牌预览信息
+  if (cardData) {
+    document.querySelector("#cropPreviewName").textContent = cardData.zh || "";
+    document.querySelector("#cropPreviewTags").textContent = [
+      cardData.type === "Spell" ? "法术" : "随从",
+      cardData.rarity,
+    ].join(" · ");
+    const isSpell = cardData.type === "Spell";
+    const statsEl = document.querySelector("#cropPreviewStats");
+    statsEl.style.display = isSpell ? "none" : "grid";
+    if (!isSpell) {
+      document.querySelector("#cropPreviewAtk").textContent = cardData.atk ?? "—";
+      document.querySelector("#cropPreviewSpd").textContent = cardData.spd ?? "—";
+      document.querySelector("#cropPreviewHp").textContent  = cardData.hp  ?? "—";
+    }
+    // 势力颜色
+    const meta = cardFactionMeta[cardData.faction] || { accent: "#72e5ff" };
+    document.querySelector("#cropCardPreview").style.borderColor = meta.accent + "99";
+    document.querySelector("#cropPreviewTags").style.color = meta.accent;
+    document.querySelector("#cropPreviewTags").style.background = `color-mix(in srgb, ${meta.accent} 15%, rgba(6,8,18,0.75))`;
+  }
+
+  img.onload = () => {
+    _cropNaturalW = img.naturalWidth;
+    _cropNaturalH = img.naturalHeight;
+    const scaleW = viewport.offsetWidth  / _cropNaturalW;
+    const scaleH = viewport.offsetHeight / _cropNaturalH;
+    _cropScale = Math.max(scaleW, scaleH);
+    _cropX = (viewport.offsetWidth  - _cropNaturalW * _cropScale) / 2;
+    _cropY = (viewport.offsetHeight - _cropNaturalH * _cropScale) / 2;
+    slider.value = Math.round(_cropScale * 100);
+    updateCropTransform();
+  };
+  img.src = url;
+
+  overlay.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function updateCropTransform() {
+  const img      = document.querySelector("#cropImg");
+  const label    = document.querySelector("#cropScaleLabel");
+  img.style.transform = `translate(${_cropX}px, ${_cropY}px) scale(${_cropScale})`;
+  label.textContent   = Math.round(_cropScale * 100) + "%";
+  updatePreview();
+}
+
+function updatePreview() {
+  const img     = document.querySelector("#cropImg");
+  const prevImg = document.querySelector("#cropPreviewImg");
+  const vp      = document.querySelector("#cropViewport");
+  const card    = document.querySelector("#cropCardPreview");
+  if (!img.src || !_cropNaturalW) return;
+
+  const vpW   = vp.offsetWidth   || 480;
+  const vpH   = vp.offsetHeight  || 320;
+  const cardW = card.offsetWidth  || 180;
+  const cardH = card.offsetHeight || 240;
+
+  // 卡牌预览比例 = 卡牌宽 / viewport宽
+  const ratio = cardW / vpW;
+
+  prevImg.src = img.src;
+  prevImg.style.width    = _cropNaturalW + "px";
+  prevImg.style.height   = _cropNaturalH + "px";
+  prevImg.style.transform = `translate(${_cropX * ratio}px, ${_cropY * ratio}px) scale(${_cropScale * ratio})`;
+}
+
+function confirmCrop() {
+  const img  = document.querySelector("#cropImg");
+  const vp   = document.querySelector("#cropViewport");
+  const vpW  = vp.offsetWidth  || 520;
+  const vpH  = vp.offsetHeight || 340;
+  const canvas = document.createElement("canvas");
+  canvas.width  = vpW;
+  canvas.height = vpH;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, _cropX, _cropY, _cropNaturalW * _cropScale, _cropNaturalH * _cropScale);
+  const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
+  saveCardImage(_cropCardId, dataUrl);
+  closeCropEditor();
+  renderCardGrid();
+}
+
+function closeCropEditor() {
+  const overlay = document.querySelector("#imgCropOverlay");
+  overlay.style.display = "none";
+  document.body.style.overflow = "";
+  _cropCardId = null;
+}
+
+function initCropEditor() {
+  const overlay  = document.querySelector("#imgCropOverlay");
+  const viewport = document.querySelector("#cropViewport");
+  const slider   = document.querySelector("#cropScale");
+
+  // 关闭
+  document.querySelector("#cropClose").addEventListener("click", closeCropEditor);
+  overlay.addEventListener("click", (e) => { if (e.target === overlay) closeCropEditor(); });
+
+  // 砍切
+  document.querySelector("#cropConfirm").addEventListener("click", confirmCrop);
+
+  // 重置
+  document.querySelector("#cropReset").addEventListener("click", () => {
+    const img = document.querySelector("#cropImg");
+    const scaleW = viewport.offsetWidth  / _cropNaturalW;
+    const scaleH = viewport.offsetHeight / _cropNaturalH;
+    _cropScale = Math.max(scaleW, scaleH);
+    _cropX = (viewport.offsetWidth  - _cropNaturalW * _cropScale) / 2;
+    _cropY = (viewport.offsetHeight - _cropNaturalH * _cropScale) / 2;
+    slider.value = Math.round(_cropScale * 100);
+    updateCropTransform();
+  });
+
+  // 滑块缩放
+  slider.addEventListener("input", () => {
+    const newScale = slider.value / 100;
+    const cx = viewport.offsetWidth  / 2;
+    const cy = viewport.offsetHeight / 2;
+    _cropX = cx - (cx - _cropX) * (newScale / _cropScale);
+    _cropY = cy - (cy - _cropY) * (newScale / _cropScale);
+    _cropScale = newScale;
+    updateCropTransform();
+  });
+
+  // 滚轮缩放
+  viewport.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const delta    = e.shiftKey ? 0.02 : 0.08;
+    const newScale = Math.max(0.1, Math.min(3, _cropScale + (e.deltaY < 0 ? delta : -delta)));
+    const rect     = viewport.getBoundingClientRect();
+    const mx       = e.clientX - rect.left;
+    const my       = e.clientY - rect.top;
+    _cropX = mx - (mx - _cropX) * (newScale / _cropScale);
+    _cropY = my - (my - _cropY) * (newScale / _cropScale);
+    _cropScale = newScale;
+    slider.value = Math.round(_cropScale * 100);
+    updateCropTransform();
+  }, { passive: false });
+
+  // 拖动
+  viewport.addEventListener("mousedown", (e) => {
+    _cropDragging   = true;
+    _cropDragStartX = e.clientX - _cropX;
+    _cropDragStartY = e.clientY - _cropY;
+    viewport.style.cursor = "grabbing";
+  });
+  window.addEventListener("mousemove", (e) => {
+    if (!_cropDragging) return;
+    _cropX = e.clientX - _cropDragStartX;
+    _cropY = e.clientY - _cropDragStartY;
+    updateCropTransform();
+  });
+  window.addEventListener("mouseup", () => {
+    _cropDragging = false;
+    viewport.style.cursor = "grab";
+  });
+
+  // 触屏拖动
+  let lastTouchX = 0, lastTouchY = 0, lastDist = 0;
+  viewport.addEventListener("touchstart", (e) => {
+    if (e.touches.length === 1) {
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+      lastDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+    }
+  });
+  viewport.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+    if (e.touches.length === 1) {
+      _cropX += e.touches[0].clientX - lastTouchX;
+      _cropY += e.touches[0].clientY - lastTouchY;
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
+      updateCropTransform();
+    } else if (e.touches.length === 2) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const newScale = Math.max(0.1, Math.min(3, _cropScale * (dist / lastDist)));
+      _cropScale = newScale;
+      lastDist = dist;
+      slider.value = Math.round(_cropScale * 100);
+      updateCropTransform();
+    }
+  }, { passive: false });
+}
+
+function openCardImagePicker(cardId) {
+  const input = document.createElement("input");
+  input.type = "file"; input.accept = "image/*";
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const allCards = await getMergedCards();
+    const cardData = allCards.find(c => c._id === cardId);
+    openCropEditor(cardId, file, cardData);
+  };
+  input.click();
+}
+
 async function renderCardGrid() {
   const grid  = document.querySelector("#cardCenterGrid");
   const label = document.querySelector("#cardCountLabel");
@@ -738,7 +967,10 @@ async function renderCardGrid() {
         <button class="game-card-edit-btn" data-edit-id="${c._id}" type="button" title="编辑">✏</button>
         <div class="lor-content">
           <div class="lor-name-bar"><span class="lor-name">${c.zh}</span></div>
-          <div class="lor-tags-bar"><span class="lor-tags">${tags}</span></div>
+          <div class="lor-tags-bar">
+            <span class="lor-tags-left">${meta.zh}</span>
+            <span class="lor-tags-right">${c.race || (c.collect === "Uncollectable" ? "Token" : "")}</span>
+          </div>
           ${c.effect ? `<div class="lor-effect-bar"><p class="lor-effect">${c.effect}</p></div>` : ""}
           <div class="lor-stats-bar">
             <span class="lor-stat lor-atk">${c.atk??'—'}</span>
@@ -753,16 +985,7 @@ async function renderCardGrid() {
   grid.querySelectorAll("[data-upload-id]").forEach(el => {
     el.addEventListener("click", (e) => {
       e.stopPropagation();
-      const id = el.dataset.uploadId;
-      const input = document.createElement("input");
-      input.type = "file"; input.accept = "image/*";
-      input.onchange = (ev) => {
-        const file = ev.target.files[0]; if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (r) => { saveCardImage(id, r.target.result); renderCardGrid(); };
-        reader.readAsDataURL(file);
-      };
-      input.click();
+      openCardImagePicker(el.dataset.uploadId);
     });
   });
 }
@@ -971,6 +1194,7 @@ function renderRaceManager() {
 function initCardCenter() {
   if (cardCenterRendered) return;
   cardCenterRendered = true;
+  initCropEditor();
   renderCardFilters();
   renderCardGrid();
   renderRaceManager();

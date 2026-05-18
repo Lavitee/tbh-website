@@ -563,6 +563,52 @@
       </div>
     </div>
 
+    <!-- 图片裁剪编辑器 -->
+    <div id="imgCropOverlay" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(5,7,15,0.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;gap:24px">
+      <!-- 左：编辑区 -->
+      <div style="background:#0f1420;border:1px solid rgba(114,229,255,0.25);border-radius:12px;width:min(320px,42vw);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0">
+        <div style="padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between">
+          <strong style="color:#fff;font-size:14px">编辑图片</strong>
+          <button id="cropClose" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1">×</button>
+        </div>
+        <div style="padding:8px 16px;font-size:11px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.06)">拖动调整位置，滚轮或拖动滑块缩放</div>
+        <div id="cropViewport" style="position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#080c18;cursor:grab">
+          <img id="cropImg" style="position:absolute;transform-origin:0 0;user-select:none;-webkit-user-drag:none;max-width:none;pointer-events:none" />
+        </div>
+        <div style="padding:12px 16px;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,0.06)">
+          <span style="font-size:11px;color:var(--muted);width:24px">🔍</span>
+          <input id="cropScale" type="range" min="10" max="400" value="100" style="flex:1" />
+          <span id="cropScaleLabel" style="font-size:12px;color:var(--cyan);width:38px;text-align:right">100%</span>
+        </div>
+        <div style="padding:0 16px 14px;display:flex;gap:8px">
+          <button id="cropReset" style="flex:1;height:34px;border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.05);color:var(--muted);font:inherit;font-size:12px;cursor:pointer">重置</button>
+          <button id="cropConfirm" style="flex:2;height:34px;border:none;border-radius:6px;background:var(--cyan);color:#000;font:inherit;font-size:13px;font-weight:700;cursor:pointer">✓ 确认并保存</button>
+        </div>
+      </div>
+
+      <!-- 右：卡牌实时预览 -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0">
+        <span style="font-size:11px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase">卡牌预览</span>
+        <!-- 卡牌外壳（模拟真实卡牌）-->
+        <div id="cropCardPreview" style="width:240px;aspect-ratio:3/4;border-radius:9px;overflow:hidden;border:2px solid rgba(114,229,255,0.4);position:relative;background:#0d1022;box-shadow:0 0 20px rgba(114,229,255,0.12)">
+          <!-- 图片层 -->
+          <img id="cropPreviewImg" style="position:absolute;transform-origin:0 0;pointer-events:none" />
+          <!-- 渐变层 -->
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 35%,rgba(6,8,18,0.55) 55%,rgba(6,8,18,0.82) 70%,rgba(6,8,18,0.96) 100%);pointer-events:none"></div>
+          <!-- 内容占位（模拟名字/词条/三围）-->
+          <div style="position:absolute;bottom:0;left:0;right:0;pointer-events:none">
+            <div id="cropPreviewName" style="padding:5px 8px 2px;font-size:12px;font-weight:900;color:#fff;text-align:center;text-shadow:0 1px 4px rgba(0,0,0,0.9)"></div>
+            <div id="cropPreviewTags" style="padding:2px 8px 3px;font-size:8px;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:0.05em;background:rgba(114,229,255,0.15);border-top:1px solid rgba(114,229,255,0.25);border-bottom:1px solid rgba(114,229,255,0.25)"></div>
+            <div id="cropPreviewStats" style="display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(4,5,14,0.88);border-top:1px solid rgba(255,255,255,0.08)">
+              <span id="cropPreviewAtk" style="padding:4px;font-size:14px;font-weight:900;color:#ff8a8a;text-align:center;border-right:1px solid rgba(255,255,255,0.08)"></span>
+              <span id="cropPreviewSpd" style="padding:4px;font-size:14px;font-weight:900;color:var(--cyan);text-align:center"></span>
+              <span id="cropPreviewHp" style="padding:4px;font-size:14px;font-weight:900;color:#7ddf8a;text-align:center;border-left:1px solid rgba(255,255,255,0.08)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="./app.js"></script>
   </body>
 </html>

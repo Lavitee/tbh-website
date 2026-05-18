@@ -2670,20 +2670,23 @@ details[open] .race-summary::before { content: "▼ "; }
 /* 词条 */
 .lor-tags-bar {
   padding: 2px 8px 4px;
-  background: color-mix(in srgb, var(--card-accent) 22%, rgba(6,8,18,0.75));
-  border-top: 1px solid color-mix(in srgb, var(--card-accent) 30%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--card-accent) 30%, transparent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.lor-tags {
-  display: block;
+.lor-tags-left,
+.lor-tags-right {
   font-size: 9px;
   font-weight: 700;
   color: var(--card-accent);
-  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   line-height: 1.4;
+}
+
+.lor-tags-right {
+  opacity: 0.8;
 }
 
 /* 效果 */
