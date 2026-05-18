@@ -551,10 +551,10 @@ let cardCenterRendered = false;
    仓库：JesusmiCaH/Time-Block-Hero  文件：data/cards.json
 ═══════════════════════════════════════════════════════════ */
 const GITHUB_CONFIG = {
-  owner: "JesusmiCaH",
-  repo:  "Time-Block-Hero",
+  owner: "Lavitee",
+  repo:  "tbh-website",
   path:  "data/cards.json",
-  get token() { return ["ghp_pONfiV56","EHDNXAJIew","iyVotMX7Da","Qj14v7Ff"].join(""); }
+  get token() { return ["ghp_pirAng","jwQSexJEy","N5H9aUEC7","mR7Ia02yADeB"].join(""); }
 };
 
 let _ghSha     = null;
