@@ -2835,6 +2835,40 @@ details[open] .race-summary::before { content: "▼ "; }
 .lor-spd { color: var(--cyan); }
 .lor-hp  { color: #7ddf8a; border-left:  1px solid rgba(255,255,255,0.08); }
 
+/* 下半编辑区 */
+.card-edit-zone {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: transparent;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 200ms, background 200ms;
+}
+
+.card-edit-zone:hover {
+  opacity: 1;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(3px);
+}
+
+/* 上传提示限制在上50% */
+.lor-bg-upload-hint,
+.spell-bg .lor-bg-upload-hint {
+  height: 50% !important;
+  top: 0;
+  bottom: auto;
+}
+
 /* 网格 */
 .card-center-grid {
   display: grid;
