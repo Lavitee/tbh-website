@@ -2544,10 +2544,101 @@ details[open] .race-summary::before { content: "▼ "; }
   flex-direction: column;
 }
 
-.lor-card[data-rarity="Common"]    { border-color: rgba(155,168,199,0.4); }
-.lor-card[data-rarity="Rare"]      { border-color: rgba(102,166,255,0.75); box-shadow: 0 0 14px rgba(102,166,255,0.18); }
-.lor-card[data-rarity="Epic"]      { border-color: rgba(185,131,255,0.8); box-shadow: 0 0 16px rgba(185,131,255,0.22); }
-.lor-card[data-rarity="Legendary"] { border-color: rgba(255,199,102,0.9); box-shadow: 0 0 20px rgba(255,199,102,0.26); }
+/* 稀有度边框 */
+.lor-card[data-rarity="Common"] {
+  border-color: rgba(155,168,199,0.4);
+  border-radius: 10px;
+}
+
+.lor-card[data-rarity="Rare"] {
+  border-color: rgba(102,166,255,0.75);
+  box-shadow: 0 0 14px rgba(102,166,255,0.18);
+  border-radius: 10px;
+  clip-path: polygon(
+    12px 0%, calc(100% - 12px) 0%,
+    100% 12px, 100% calc(100% - 12px),
+    calc(100% - 12px) 100%, 12px 100%,
+    0% calc(100% - 12px), 0% 12px
+  );
+}
+
+.lor-card[data-rarity="Epic"] {
+  border-color: rgba(185,131,255,0.8);
+  box-shadow: 0 0 16px rgba(185,131,255,0.22);
+  border-radius: 4px;
+  clip-path: polygon(
+    50% 0%,
+    calc(50% + 16px) 8px,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(50% + 16px) calc(100% - 8px),
+    50% 100%,
+    calc(50% - 16px) calc(100% - 8px),
+    0% calc(100% - 8px),
+    0% 8px,
+    calc(50% - 16px) 8px
+  );
+}
+.lor-card[data-rarity="Epic"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  border: 2px solid rgba(185,131,255,0.8);
+  border-radius: 4px;
+  clip-path: polygon(
+    50% 0%,
+    calc(50% + 16px) 8px,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(50% + 16px) calc(100% - 8px),
+    50% 100%,
+    calc(50% - 16px) calc(100% - 8px),
+    0% calc(100% - 8px),
+    0% 8px,
+    calc(50% - 16px) 8px
+  );
+}
+
+.lor-card[data-rarity="Legendary"] {
+  border-color: rgba(255,199,102,0.9);
+  box-shadow: 0 0 20px rgba(255,199,102,0.26);
+  border-radius: 4px;
+  clip-path: polygon(
+    16px 0%,
+    calc(100% - 16px) 0%,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    0% calc(100% - 16px),
+    0% 16px
+  );
+}
+.lor-card[data-rarity="Legendary"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  border: 2px solid rgba(255,199,102,0.9);
+  clip-path: polygon(
+    16px 0%,
+    calc(100% - 16px) 0%,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    0% calc(100% - 16px),
+    0% 16px
+  );
+  background:
+    linear-gradient(135deg, rgba(255,199,102,0.6) 0%, transparent 20px) top left / 20px 20px no-repeat,
+    linear-gradient(225deg, rgba(255,199,102,0.6) 0%, transparent 20px) top right / 20px 20px no-repeat,
+    linear-gradient(315deg, rgba(255,199,102,0.6) 0%, transparent 20px) bottom left / 20px 20px no-repeat,
+    linear-gradient(45deg,  rgba(255,199,102,0.6) 0%, transparent 20px) bottom right / 20px 20px no-repeat;
+}
 
 .lor-card:hover { transform: translateY(-4px); }
 
@@ -2600,10 +2691,10 @@ details[open] .race-summary::before { content: "▼ "; }
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    transparent 35%,
-    rgba(6,8,18,0.55) 55%,
-    rgba(6,8,18,0.82) 70%,
-    rgba(6,8,18,0.96) 100%
+    transparent 30%,
+    rgba(6,8,18,0.4) 50%,
+    rgba(6,8,18,0.6) 65%,
+    rgba(6,8,18,0.75) 100%
   );
 }
 
@@ -2649,6 +2740,18 @@ details[open] .race-summary::before { content: "▼ "; }
   z-index: 3;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.lor-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 40%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%);
+  z-index: -1;
 }
 
 /* 名字 */
@@ -2692,26 +2795,27 @@ details[open] .race-summary::before { content: "▼ "; }
 /* 效果 */
 .lor-effect-bar {
   padding: 5px 9px;
-  background: rgba(6,8,18,0.72);
+  background: rgba(6,8,18,0.2);
 }
 
 .lor-effect {
   margin: 0;
   font-size: 10px;
-  color: #d4ddf5;
+  color: #e8eeff;
   line-height: 1.5;
   text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
 }
 
 /* 三围底栏 */
 .lor-stats-bar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background: rgba(4,5,14,0.88);
+  background: rgba(4,5,14,0.2);
   border-top: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -2754,10 +2858,100 @@ details[open] .race-summary::before { content: "▼ "; }
   flex-direction: column;
 }
 
-.spell-card[data-rarity="Common"]    { border-color: rgba(155,168,199,0.5); }
-.spell-card[data-rarity="Rare"]      { border-color: rgba(102,166,255,0.8); box-shadow: 0 0 16px rgba(102,166,255,0.2); }
-.spell-card[data-rarity="Epic"]      { border-color: rgba(185,131,255,0.85); box-shadow: 0 0 18px rgba(185,131,255,0.25); }
-.spell-card[data-rarity="Legendary"] { border-color: rgba(255,199,102,0.9); box-shadow: 0 0 22px rgba(255,199,102,0.28); }
+.spell-card[data-rarity="Common"] {
+  border-color: rgba(155,168,199,0.5);
+  border-radius: 10px;
+}
+
+.spell-card[data-rarity="Rare"] {
+  border-color: rgba(102,166,255,0.8);
+  box-shadow: 0 0 16px rgba(102,166,255,0.2);
+  border-radius: 10px;
+  clip-path: polygon(
+    12px 0%, calc(100% - 12px) 0%,
+    100% 12px, 100% calc(100% - 12px),
+    calc(100% - 12px) 100%, 12px 100%,
+    0% calc(100% - 12px), 0% 12px
+  );
+}
+
+.spell-card[data-rarity="Epic"] {
+  border-color: rgba(185,131,255,0.85);
+  box-shadow: 0 0 18px rgba(185,131,255,0.25);
+  border-radius: 4px;
+  clip-path: polygon(
+    50% 0%,
+    calc(50% + 16px) 8px,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(50% + 16px) calc(100% - 8px),
+    50% 100%,
+    calc(50% - 16px) calc(100% - 8px),
+    0% calc(100% - 8px),
+    0% 8px,
+    calc(50% - 16px) 8px
+  );
+}
+.spell-card[data-rarity="Epic"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  border: 2px solid rgba(185,131,255,0.85);
+  border-radius: 4px;
+  clip-path: polygon(
+    50% 0%,
+    calc(50% + 16px) 8px,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(50% + 16px) calc(100% - 8px),
+    50% 100%,
+    calc(50% - 16px) calc(100% - 8px),
+    0% calc(100% - 8px),
+    0% 8px,
+    calc(50% - 16px) 8px
+  );
+}
+
+.spell-card[data-rarity="Legendary"] {
+  border-color: rgba(255,199,102,0.9);
+  box-shadow: 0 0 22px rgba(255,199,102,0.28);
+  border-radius: 4px;
+  clip-path: polygon(
+    16px 0%,
+    calc(100% - 16px) 0%,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    0% calc(100% - 16px),
+    0% 16px
+  );
+}
+.spell-card[data-rarity="Legendary"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  border: 2px solid rgba(255,199,102,0.9);
+  clip-path: polygon(
+    16px 0%,
+    calc(100% - 16px) 0%,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    0% calc(100% - 16px),
+    0% 16px
+  );
+  background:
+    linear-gradient(135deg, rgba(255,199,102,0.6) 0%, transparent 20px) top left / 20px 20px no-repeat,
+    linear-gradient(225deg, rgba(255,199,102,0.6) 0%, transparent 20px) top right / 20px 20px no-repeat,
+    linear-gradient(315deg, rgba(255,199,102,0.6) 0%, transparent 20px) bottom left / 20px 20px no-repeat,
+    linear-gradient(45deg,  rgba(255,199,102,0.6) 0%, transparent 20px) bottom right / 20px 20px no-repeat;
+}
 
 .spell-card:hover { transform: translateY(-4px); }
 
