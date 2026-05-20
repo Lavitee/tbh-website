@@ -1266,6 +1266,7 @@ const PRESET_KEYWORDS = [
   { name:"入场",   icon:"►", color:"#36f0a4", bg:"rgba(54,240,164,0.10)",  border:"rgba(54,240,164,0.35)",  shape:"play",    desc:"该牌被放置时触发的效果。" },
   { name:"限定",   icon:"◉", color:"#ffc766", bg:"rgba(255,199,102,0.10)", border:"rgba(255,199,102,0.35)", shape:"star",    desc:"随从每次存活期间只能使用一次的效果。" },
   { name:"⭐星能",  icon:"", color:"#ffd700", bg:"rgba(255,215,0,0.15)",    border:"rgba(255,215,0,0.55)",   shape:"rect",    desc:"每回合开始阶段获得星能的数量。" },
+  { name:"可建造", icon:"🔨", color:"#a8d8ff", bg:"rgba(168,216,255,0.13)", border:"rgba(168,216,255,0.45)", shape:"rect",    desc:"该单位可在箭头不足时预先放置，视作仅有生命值的白板单位。每回合结束积攒 X 点建造点数，满足需求后立即转化为对应单位。" },
 ];
 
 // 形状 clip-path（全部统一为 rect，不使用 clip-path）
