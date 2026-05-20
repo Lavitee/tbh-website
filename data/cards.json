@@ -308,7 +308,7 @@
     },
     {
       "zh": "护甲碎片",
-      "en": "",
+      "en": null,
       "type": "Spell",
       "rarity": "Common",
       "faction": "neutral",
@@ -319,7 +319,7 @@
       "hp": null,
       "spd": null,
       "arrows": null,
-      "effect": "拾取：获得 1 点护甲。",
+      "effect": "[拾取] 获得 1 点护甲。",
       "desc": "拾取：获得 1 点护甲。",
       "uid": 53,
       "_id": "c_pickup_005"
