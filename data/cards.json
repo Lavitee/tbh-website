@@ -413,6 +413,24 @@
       "desc": null,
       "uid": 58,
       "_id": "c_1779255099025"
+    },
+    {
+      "zh": "帝国基建小队",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Common",
+      "faction": "astra",
+      "collect": "Collectable",
+      "cost": 0,
+      "race": null,
+      "atk": null,
+      "hp": 2,
+      "spd": 1,
+      "arrows": "NW,N",
+      "effect": "该单位的箭头只能用于 放置/建造 建筑单位。",
+      "desc": null,
+      "uid": 59,
+      "_id": "c_1779255239257"
     }
   ],
   "overrides": {
