@@ -43,7 +43,7 @@
       "faction": "neutral",
       "collect": "InitHero",
       "cost": "hero",
-      "race": null,
+      "race": "Human",
       "atk": 1,
       "hp": 20,
       "spd": 2,
