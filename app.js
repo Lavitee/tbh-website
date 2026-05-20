@@ -1265,7 +1265,7 @@ const PRESET_KEYWORDS = [
   { name:"野怪",   icon:"▲", color:"#ff7070", bg:"rgba(210,67,67,0.13)",   border:"rgba(210,67,67,0.45)",   shape:"tri",     desc:"在场地上游荡的野生怪物；击杀可获得奖励。" },
   { name:"入场",   icon:"►", color:"#36f0a4", bg:"rgba(54,240,164,0.10)",  border:"rgba(54,240,164,0.35)",  shape:"play",    desc:"该牌被放置时触发的效果。" },
   { name:"限定",   icon:"◉", color:"#ffc766", bg:"rgba(255,199,102,0.10)", border:"rgba(255,199,102,0.35)", shape:"star",    desc:"随从每次存活期间只能使用一次的效果。" },
-  { name:"⭐星能",  icon:"⭐", color:"#ffd700", bg:"rgba(255,215,0,0.15)",    border:"rgba(255,215,0,0.55)",   shape:"rect",    desc:"每回合开始阶段获得星能的数量。" },
+  { name:"⭐星能",  icon:"", color:"#ffd700", bg:"rgba(255,215,0,0.15)",    border:"rgba(255,215,0,0.55)",   shape:"rect",    desc:"每回合开始阶段获得星能的数量。" },
 ];
 
 // 形状 clip-path（全部统一为 rect，不使用 clip-path）
