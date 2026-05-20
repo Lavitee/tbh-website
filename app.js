@@ -1282,11 +1282,20 @@ const KW_SHAPES = {
 };
 
 function initPresetKeywords() {
-  if (localStorage.getItem("tbh-kw-initialized")) return;
-  localStorage.setItem("tbh-custom-keywords", JSON.stringify(
-    PRESET_KEYWORDS.map(k => ({ name: k.name, desc: k.desc }))
-  ));
-  localStorage.setItem("tbh-kw-initialized", "1");
+  // 每次都检查并补充新增的预设词条，而不是只运行一次
+  const saved = loadCustomKeywords();
+  const savedNames = new Set(saved.map(k => k.name));
+  let changed = false;
+  for (const p of PRESET_KEYWORDS) {
+    if (!savedNames.has(p.name)) {
+      saved.push({ name: p.name, desc: p.desc });
+      changed = true;
+    }
+  }
+  if (changed || !localStorage.getItem("tbh-kw-initialized")) {
+    saveCustomKeywords(saved);
+    localStorage.setItem("tbh-kw-initialized", "1");
+  }
 }
 
 function getKwStyle(name) {
