@@ -18,7 +18,24 @@
       "_id": "c_1779129180006"
     }
   ],
-  "overrides": {},
+  "overrides": {
+    "b4": {
+      "zh": "星际上将",
+      "en": "Space General",
+      "type": "Minion",
+      "rarity": "Rare",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 7,
+      "race": null,
+      "atk": 6,
+      "hp": 7,
+      "spd": 5,
+      "arrows": "N",
+      "effect": null,
+      "desc": null
+    }
+  },
   "cardImages": {
     "b0": "https://raw.githubusercontent.com/Lavitee/tbh-website/main/data/images/card-b0.jpg",
     "b1": "https://raw.githubusercontent.com/Lavitee/tbh-website/main/data/images/card-b1.jpg",
