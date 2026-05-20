@@ -3358,3 +3358,180 @@ details[open] .race-summary::before { content: "▼ "; }
   }
 }
 
+/* ═══════════════════════════════════════════════════════
+   KEYWORD MANAGER 样式
+═══════════════════════════════════════════════════════ */
+
+.keyword-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.keyword-row {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.keyword-row.builtin {
+  border-color: rgba(255,199,102,0.2);
+  background: rgba(255,199,102,0.04);
+}
+
+.keyword-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* LoR 风格词条标签 */
+.keyword-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 3px 10px 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.keyword-badge-builtin {
+  background: rgba(255,199,102,0.12);
+  color: var(--gold, #ffc766);
+  border: 1px solid rgba(255,199,102,0.35);
+}
+
+.keyword-badge-custom {
+  background: rgba(114,229,255,0.1);
+  color: var(--cyan, #72e5ff);
+  border: 1px solid rgba(114,229,255,0.3);
+}
+
+/* 卡牌效果文本中嵌入的词条标签 */
+.kw-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .85em;
+  font-weight: 800;
+  letter-spacing: .04em;
+  padding: 1px 7px 1px 5px;
+  border-radius: 3px;
+  background: rgba(114,229,255,0.12);
+  color: var(--cyan, #72e5ff);
+  border: 1px solid rgba(114,229,255,0.28);
+  vertical-align: middle;
+  cursor: help;
+}
+
+/* 模态内预览 badge */
+.kw-preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .9em;
+  font-weight: 800;
+  padding: 1px 8px 1px 6px;
+  border-radius: 4px;
+  background: rgba(54,240,164,0.12);
+  color: #36f0a4;
+  border: 1px solid rgba(54,240,164,0.3);
+  vertical-align: middle;
+}
+
+.keyword-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  margin: 0;
+  line-height: 1.6;
+  padding-left: 2px;
+}
+
+.keyword-row-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.kw-edit-btn, .kw-del-btn {
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s, color .15s;
+}
+
+.kw-edit-btn:hover {
+  background: rgba(114,229,255,0.12);
+  color: var(--cyan);
+  border-color: rgba(114,229,255,0.3);
+}
+
+.kw-del-btn:hover {
+  background: rgba(210,67,67,0.12);
+  color: #ff7070;
+  border-color: rgba(210,67,67,0.3);
+}
+
+.keyword-builtin-label {
+  font-size: 11px;
+  color: rgba(255,199,102,0.5);
+  letter-spacing: .04em;
+}
+
+.keyword-add-row {
+  margin-top: 4px;
+}
+
+/* 卡牌编辑器—词条插入栏 */
+.kw-insert-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+}
+
+.kw-insert-label {
+  font-size: 11px;
+  color: var(--muted);
+  align-self: center;
+  white-space: nowrap;
+  margin-right: 2px;
+}
+
+.kw-insert-chip {
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  border: 1px solid rgba(114,229,255,0.25);
+  background: rgba(114,229,255,0.07);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .12s;
+  letter-spacing: .02em;
+}
+
+.kw-insert-chip:hover {
+  background: rgba(114,229,255,0.18);
+  border-color: rgba(114,229,255,0.5);
+}
+

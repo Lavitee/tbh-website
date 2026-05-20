@@ -808,6 +808,7 @@ function openCropEditor(cardId, file, cardData) {
 
   overlay.style.display = "flex";
   document.body.style.overflow = "hidden";
+  renderKwInsertBar();
 }
 
 function updateCropTransform() {
@@ -1024,7 +1025,7 @@ async function renderCardGrid() {
               <span class="spell-glyph" style="color:${meta.accent}">✶</span>
             </div>
             <div class="spell-tags">${tags}</div>
-            ${c.effect ? `<div class="spell-effect">${c.effect}</div>` : ''}
+            ${c.effect ? `<div class="spell-effect">${renderCardEffect(c.effect)}</div>` : ''}
           </div>` : `
 
           <div class="lor-bg" data-upload-id="${c._id}">
@@ -1041,7 +1042,7 @@ async function renderCardGrid() {
               <span class="lor-tags-left">${meta.zh}</span>
               <span class="lor-tags-right">${c.race || (c.collect === "Uncollectable" ? "Token" : "")}</span>
             </div>
-            ${c.effect ? `<div class="lor-effect-bar"><p class="lor-effect">${c.effect}</p></div>` : ""}
+            ${c.effect ? `<div class="lor-effect-bar"><p class="lor-effect">${renderCardEffect(c.effect)}</p></div>` : ""}
             <div class="lor-stats-bar">
               <span class="lor-stat lor-atk">${c.atk??'—'}</span>
               <span class="lor-stat lor-spd">${c.spd??'—'}</span>
@@ -1152,6 +1153,7 @@ async function openCardEditor(cardId) {
   }
   overlay.style.display = "flex";
   document.body.style.overflow = "hidden";
+  renderKwInsertBar();
 }
 
 function closeCardEditor() {
@@ -1218,6 +1220,201 @@ function renderCardFilters() {
   });
 }
 
+/* ═══════════════════════════════════════════════════════════
+   KEYWORD MANAGER — 词条编辑器
+═══════════════════════════════════════════════════════════ */
+
+// 内置词条（不可删除）
+const builtinKeywords = [
+  { name: "Remove 移除",      desc: "Remove the card from your deck, it'll never occur in your following game." },
+  { name: "Durability",          desc: "This card will be auto removed when it's discarded from the field at its x-th time." },
+  { name: "Pickup 拾取",         desc: "This card is automatically removed when a player's minion steps onto the grid it locates, and that player resolve the effects." },
+  { name: "Motion 动作",         desc: "A keyword for effects. This effect can only be resolved during Time Move phase." },
+  { name: "Upgradable 可升级",   desc: "This card has an upgraded form, and can be upgraded with some card effects." },
+  { name: "Equip 装备",          desc: "Cards can be overlapped onto other cards to trigger some effects." },
+  { name: "Arrow Request 笭头需求", desc: "This card can only be placed onto a friendly grid within at least x friendly arrows pointing to." },
+  { name: "Monsters 野思",       desc: "Natural monsters wandering on the field. Players can kill them to gain some rewards." },
+  { name: "OnPlace 入场",        desc: "Effect that are triggered once the card is placed." },
+  { name: "Expend 限定",         desc: "Effect of a minion which can only be used once per life." },
+];
+
+function loadCustomKeywords() {
+  try {
+    const saved = localStorage.getItem("tbh-custom-keywords");
+    return saved ? JSON.parse(saved) : [];
+  } catch { return []; }
+}
+function saveCustomKeywords(arr) { localStorage.setItem("tbh-custom-keywords", JSON.stringify(arr)); }
+
+function getAllKeywords() {
+  return [...builtinKeywords.map(k => ({ ...k, builtin: true })), ...loadCustomKeywords().map(k => ({ ...k, builtin: false }))];
+}
+
+let _kwEditId = null; // 当前正在编辑的词条 index（自定义列表索引）
+
+function openKeywordModal(customIdx) {
+  const customs = loadCustomKeywords();
+  const kw = customIdx != null ? customs[customIdx] : null;
+  _kwEditId = customIdx ?? null;
+
+  const overlay = document.querySelector("#keywordModalOverlay");
+  if (!overlay) return;
+  overlay.querySelector("#kwModalTitle").textContent = kw ? `编辑词条：${kw.name}` : "新建词条";
+  overlay.querySelector("#kwNameInput").value = kw ? kw.name : "";
+  overlay.querySelector("#kwDescInput").value = kw ? kw.desc : "";
+  overlay.style.display = "flex";
+}
+
+function closeKeywordModal() {
+  const overlay = document.querySelector("#keywordModalOverlay");
+  if (overlay) overlay.style.display = "none";
+  _kwEditId = null;
+}
+
+function saveKeyword() {
+  const name = document.querySelector("#kwNameInput").value.trim();
+  const desc = document.querySelector("#kwDescInput").value.trim();
+  if (!name) { alert("请输入词条名称！"); return; }
+  const customs = loadCustomKeywords();
+  if (_kwEditId != null) {
+    customs[_kwEditId] = { name, desc };
+  } else {
+    customs.push({ name, desc });
+  }
+  saveCustomKeywords(customs);
+  closeKeywordModal();
+  renderKeywordManager();
+}
+
+function deleteKeyword(customIdx) {
+  const customs = loadCustomKeywords();
+  const kw = customs[customIdx];
+  if (!kw || !confirm(`确认删除词条「${kw.name}」？`)) return;
+  customs.splice(customIdx, 1);
+  saveCustomKeywords(customs);
+  renderKeywordManager();
+}
+
+function renderKeywordManager() {
+  const listEl = document.querySelector("#keywordList");
+  const addBtn = document.querySelector("#keywordAddBtn");
+  if (!listEl || !addBtn) return;
+
+  const all = getAllKeywords();
+  const customs = loadCustomKeywords();
+
+  listEl.innerHTML = all.map((kw, i) => {
+    const customIdx = kw.builtin ? null : i - builtinKeywords.length;
+    return `
+      <div class="keyword-row ${kw.builtin ? "builtin" : ""} glass-panel">
+        <div class="keyword-row-top">
+          <span class="keyword-badge ${kw.builtin ? "keyword-badge-builtin" : "keyword-badge-custom"}">⬡ ${kw.name}</span>
+          <div class="keyword-row-actions">
+            ${!kw.builtin ? `
+              <button class="kw-edit-btn" data-kw-idx="${customIdx}" type="button">编辑</button>
+              <button class="kw-del-btn" data-kw-del="${customIdx}" type="button">删除</button>
+            ` : `<span class="keyword-builtin-label">内置</span>`}
+          </div>
+        </div>
+        <p class="keyword-desc">${escapeHtml(kw.desc || "")}</p>
+      </div>`;
+  }).join("") || `<span style="color:var(--muted);font-size:12px">暂无词条</span>`;
+
+  listEl.addEventListener("click", (e) => {
+    const editBtn = e.target.closest("[data-kw-idx]");
+    const delBtn  = e.target.closest("[data-kw-del]");
+    if (editBtn) openKeywordModal(Number(editBtn.dataset.kwIdx));
+    if (delBtn)  deleteKeyword(Number(delBtn.dataset.kwDel));
+  }, { once: true });
+
+  addBtn.onclick = () => openKeywordModal(null);
+
+  // 建立 / 更新 Modal DOM
+  ensureKeywordModal();
+}
+
+/* 词条插入栏 — 在卡牌编辑器效果说明旁显示 */
+function renderKwInsertBar() {
+  const bar = document.querySelector("#kwInsertBar");
+  const textarea = document.querySelector("#cardEditorForm [name='effect']");
+  if (!bar || !textarea) return;
+  const all = getAllKeywords();
+  bar.innerHTML = `
+    <span class="kw-insert-label">插入词条：</span>
+    ${all.map(kw => `<button class="kw-insert-chip" data-kw="${kw.name}" type="button" title="${kw.desc || kw.name}">${kw.name}</button>`).join("")}`;
+  bar.onclick = (e) => {
+    const btn = e.target.closest("[data-kw]");
+    if (!btn) return;
+    const tag = `[${btn.dataset.kw}]`;
+    const start = textarea.selectionStart;
+    const end   = textarea.selectionEnd;
+    const val   = textarea.value;
+    textarea.value = val.slice(0, start) + tag + val.slice(end);
+    textarea.selectionStart = textarea.selectionEnd = start + tag.length;
+    textarea.focus();
+  };
+}
+
+/* 渲染卡牌效果文本：[xxx] 替换为带框标签 */
+function renderCardEffect(text) {
+  if (!text) return "";
+  const kwNames = getAllKeywords().map(k => k.name);
+  // 转义 HTML——再替换 [xxx]
+  return escapeHtml(text).replace(/\[([^\]]+)\]/g, (_, name) => {
+    const matched = kwNames.find(k => k.toLowerCase() === name.toLowerCase()) || name;
+    return `<span class="kw-inline">⬡ ${escapeHtml(matched)}</span>`;
+  });
+}
+
+function ensureKeywordModal() {
+  if (document.querySelector("#keywordModalOverlay")) return;
+  const el = document.createElement("div");
+  el.id = "keywordModalOverlay";
+  el.style.cssText = "display:none;position:fixed;inset:0;z-index:600;background:rgba(5,7,15,0.92);backdrop-filter:blur(8px);align-items:center;justify-content:center";
+  el.innerHTML = `
+    <div style="background:#0f1420;border:1px solid rgba(114,229,255,0.25);border-radius:12px;width:min(480px,92vw);display:flex;flex-direction:column;overflow:hidden">
+      <div style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between">
+        <strong id="kwModalTitle" style="color:#fff;font-size:15px">新建词条</strong>
+        <button id="kwModalClose" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1">×</button>
+      </div>
+      <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+        <div>
+          <label style="font-size:12px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:6px">词条名称 <span style="color:#ff7070">*</span></label>
+          <input id="kwNameInput" type="text" maxlength="48" placeholder="如：Fast / 快速" style="width:100%;background:#080c18;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font:inherit;font-size:14px;padding:8px 12px;box-sizing:border-box" />
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:6px">词条说明</label>
+          <textarea id="kwDescInput" rows="4" placeholder="不填写则悬停显示所有具有该词条的卡牌列表" style="width:100%;background:#080c18;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font:inherit;font-size:13px;padding:8px 12px;box-sizing:border-box;resize:vertical"></textarea>
+        </div>
+        <!-- 词条预览 -->
+        <div>
+          <label style="font-size:12px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:8px">卡牌中显示效果预览</label>
+          <div style="background:#060810;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px 14px;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7">
+            可将词条插入效果文本：<span class="kw-preview-badge kw-preview-live" id="kwPreviewBadge">词条名</span>：触发时可进行相关操作。
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 20px 18px;display:flex;justify-content:flex-end;gap:10px">
+        <button id="kwModalCancel" style="padding:8px 18px;border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.05);color:var(--muted);font:inherit;font-size:13px;cursor:pointer">取消</button>
+        <button id="kwModalSave" style="padding:8px 22px;border:none;border-radius:6px;background:var(--cyan);color:#000;font:inherit;font-size:13px;font-weight:700;cursor:pointer">保存</button>
+      </div>
+    </div>`;
+  document.body.appendChild(el);
+
+  el.addEventListener("click", (e) => { if (e.target === el) closeKeywordModal(); });
+  el.querySelector("#kwModalClose").addEventListener("click", closeKeywordModal);
+  el.querySelector("#kwModalCancel").addEventListener("click", closeKeywordModal);
+  el.querySelector("#kwModalSave").addEventListener("click", saveKeyword);
+
+  // 实时预览词条名
+  el.querySelector("#kwNameInput").addEventListener("input", (e) => {
+    const badge = el.querySelector("#kwPreviewBadge");
+    badge.textContent = e.target.value.trim() || "词条名";
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+
 function renderRaceManager() {
   const row = document.querySelector("#raceTagsRow");
   const input = document.querySelector("#raceInput");
@@ -1268,6 +1465,7 @@ function initCardCenter() {
   renderCardFilters();
   renderCardGrid();
   renderRaceManager();
+  renderKeywordManager();
   renderCustomCardsList();
   document.querySelector("#cardSearch").addEventListener("input", (e) => {
     cardSearchQuery = e.target.value.trim(); renderCardGrid();

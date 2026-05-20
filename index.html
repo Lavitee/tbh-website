@@ -387,6 +387,19 @@
           </details>
         </div>
 
+        <!-- 词条编辑器 -->
+        <details class="race-details" id="keywordDetails">
+        <summary class="race-summary">词条编辑 · Keyword Editor</summary>
+        <div class="race-inner">
+        <p class="race-manager-hint">词条会显示为带框高亮标签（参考 LoR 风格），可插入卡牌效果说明。内置词条以金色显示，不可删除。</p>
+        <div class="keyword-list" id="keywordList"></div>
+        <div class="keyword-add-row">
+          <button class="race-add-btn" id="keywordAddBtn" type="button">＋ 新建词条</button>
+        </div>
+        </div>
+        </details>
+        </div>
+
         <!-- 筛选器 -->
         <div class="card-filter-panel" id="cardFilterPanel"></div>
 
@@ -542,6 +555,7 @@
               <div class="form-field form-field-full">
                 <label>效果说明</label>
                 <textarea name="effect" rows="3" placeholder="OnPlace: ...&#10;OnCast: ...&#10;OnDeath: ..."></textarea>
+                <div class="kw-insert-bar" id="kwInsertBar"></div>
               </div>
               <div class="form-field form-field-full">
                 <label>卡牌描述（风味文字）</label>
