@@ -34,6 +34,22 @@
       "arrows": null,
       "effect": null,
       "desc": null
+    },
+    "b0": {
+      "zh": "澈",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Legendary",
+      "faction": "neutral",
+      "collect": "InitHero",
+      "cost": "hero",
+      "race": null,
+      "atk": 1,
+      "hp": 20,
+      "spd": 2,
+      "arrows": null,
+      "effect": "Expend: Destroy a monster in his 5x5 adjacent area. (Refresh at the start of 4/7/11-th turn.)[Remove 移除]",
+      "desc": null
     }
   },
   "cardImages": {
