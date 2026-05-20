@@ -642,7 +642,7 @@ async function getMergedCards() {
   const builtins = gameCards.map((c, i) => {
     const id = "b" + i;
     const ovr = overrides[id] || {};
-    return { ...c, ...ovr, _id: id, _isCustom: false, _isEdited: !!overrides[id] };
+    return { ...c, ...ovr, _id: id, _isCustom: false, _isEdited: !!overrides[id], uid: i + 1 };
   });
   return [...builtins, ...customs.map((c) => ({ ...c, _isCustom: true, _isEdited: false }))];
 }
@@ -656,7 +656,9 @@ async function getFilteredCards() {
     if (cardFilters.rarity  !== "all" && c.rarity.toLowerCase() !== cardFilters.rarity) return false;
     if (cardSearchQuery) {
       const q = cardSearchQuery.toLowerCase();
-      if (!(c.zh||"").toLowerCase().includes(q) && !(c.en||"").toLowerCase().includes(q)) return false;
+      const matchName = (c.zh||"" ).toLowerCase().includes(q) || (c.en||"").toLowerCase().includes(q);
+      const matchUid  = c.uid != null && String(c.uid) === q.trim();
+      if (!matchName && !matchUid) return false;
     }
     return true;
   });
@@ -1099,6 +1101,9 @@ function setFormValues(card) {
   set("cost", card.collect==="InitHero"?"": (card.cost==="hero"?"": (card.cost??"")));
   set("race", card.race??""); set("atk", card.atk??""); set("hp", card.hp??"");
   set("spd", card.spd??""); set("effect", card.effect??""); set("desc", card.desc??"");
+  // uid — 内置卡只读，自定义可编辑
+  const uidEl = f.elements["uid"];
+  if (uidEl) { uidEl.value = card.uid != null ? String(card.uid) : ""; }
   arrowsSet = new Set(card.arrows ? card.arrows.split(",").map((s)=>s.trim()).filter(Boolean) : []);
   syncArrowsCompass();
   toggleMinionSection(card.type !== "Spell");
@@ -1108,6 +1113,7 @@ function getFormValues() {
   const f = document.querySelector("#cardEditorForm");
   const g = (name) => f.elements[name]?.value ?? "";
   const type = g("type"), collect = g("collect"), costRaw = g("cost"), isHero = collect === "InitHero";
+  const uidRaw = g("uid").trim();
   return {
     zh: g("zh").trim(), en: g("en").trim() || null, type, rarity: g("rarity"),
     faction: g("faction"), collect,
@@ -1118,6 +1124,7 @@ function getFormValues() {
     spd: type==="Spell"?null:(g("spd")===""?null:Number(g("spd"))),
     arrows: [...arrowsSet].join(",") || null,
     effect: g("effect").trim() || null, desc: g("desc").trim() || null,
+    uid: uidRaw !== "" && !isNaN(Number(uidRaw)) ? Number(uidRaw) : null,
   };
 }
 
@@ -1143,6 +1150,13 @@ async function openCardEditor(cardId) {
     deleteBtn.style.display = "none";
     document.querySelector("#cardEditorForm").reset();
     arrowsSet = new Set(); syncArrowsCompass(); toggleMinionSection(true);
+    // 新建时预算下一个 uid
+    const allCards = await getMergedCards();
+    const usedUids = new Set(allCards.map(c => c.uid).filter(u => u != null));
+    let next = 1;
+    while (usedUids.has(next)) next++;
+    const uidEl = document.querySelector("#cardEditorForm [name='uid']");
+    if (uidEl) { uidEl.value = next; uidEl.readOnly = false; uidEl.style.opacity = "1"; }
   } else {
     const allCards = await getMergedCards();
     const card = allCards.find((c) => c._id === editorCardId);
@@ -1150,6 +1164,11 @@ async function openCardEditor(cardId) {
     titleEl.textContent = card._isCustom ? `编辑卡牌：${card.zh}` : `编辑内置卡牌：${card.zh}`;
     deleteBtn.style.display = card._isCustom ? "" : "none";
     setFormValues(card);
+    const uidEl = document.querySelector("#cardEditorForm [name='uid']");
+    if (uidEl) {
+      uidEl.readOnly = !card._isCustom;
+      uidEl.style.opacity = card._isCustom ? "1" : "0.5";
+    }
   }
   overlay.style.display = "flex";
   document.body.style.overflow = "hidden";
@@ -1167,11 +1186,21 @@ async function saveCard() {
   if (!data.zh) { alert("请填写卡牌中文名！"); return; }
   if (editorCardId === null) {
     const customs = await getCustomCards();
+    // 自动分配最小可用 uid
+    if (data.uid == null) {
+      const allCards = await getMergedCards();
+      const usedUids = new Set(allCards.map(c => c.uid).filter(u => u != null));
+      let next = 1;
+      while (usedUids.has(next)) next++;
+      data.uid = next;
+    }
     customs.push({ ...data, _id: "c_" + Date.now() });
     await saveCustomCards(customs);
   } else if (editorCardId.startsWith("b")) {
     const overrides = await getCardOverrides();
-    overrides[editorCardId] = data;
+    // 内置卡 uid 不可被覆盖
+    const { uid: _, ...dataWithoutUid } = data;
+    overrides[editorCardId] = dataWithoutUid;
     await saveCardOverrides(overrides);
   } else {
     const customs = await getCustomCards();
