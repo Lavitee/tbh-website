@@ -477,6 +477,22 @@
       "arrows": "E",
       "effect": "[入场] Gain 2 Charge. [可升级] 火箭动力 / 射击模式",
       "desc": "Gather the energy from the sun."
+    },
+    "b24": {
+      "zh": "火箭动力",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Rare",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 4,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "E",
+      "effect": "[入场] Gain 4 Charge. You may spend charges to conduct extra moves of your Mech minions.",
+      "desc": null
     }
   },
   "cardImages": {
