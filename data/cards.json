@@ -395,6 +395,24 @@
       "desc": null,
       "uid": 57,
       "_id": "c_1779254443840"
+    },
+    {
+      "zh": "帝国军工厂",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Rare",
+      "faction": "astra",
+      "collect": "Collectable",
+      "cost": 4,
+      "race": null,
+      "atk": null,
+      "hp": 3,
+      "spd": null,
+      "arrows": "NW,NE",
+      "effect": null,
+      "desc": null,
+      "uid": 58,
+      "_id": "c_1779255099025"
     }
   ],
   "overrides": {
