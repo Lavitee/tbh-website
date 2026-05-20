@@ -359,6 +359,24 @@
       "desc": "击杀奖励：获得一个额外的时动阶段；本局游戏的剩余时间内，你时停阶段的行动计数 -2。",
       "uid": 55,
       "_id": "c_hollow_002"
+    },
+    {
+      "zh": "维拉",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Legendary",
+      "faction": "astra",
+      "collect": "InitHero",
+      "cost": "hero",
+      "race": null,
+      "atk": null,
+      "hp": 20,
+      "spd": 0,
+      "arrows": "N",
+      "effect": "每个回合开始时：提供1护甲。",
+      "desc": null,
+      "uid": 56,
+      "_id": "c_1779253783625"
     }
   ],
   "overrides": {
