@@ -431,6 +431,24 @@
       "desc": null,
       "uid": 59,
       "_id": "c_1779255239257"
+    },
+    {
+      "zh": "帝国征召兵",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Common",
+      "faction": "astra",
+      "collect": "Collectable",
+      "cost": null,
+      "race": null,
+      "atk": 2,
+      "hp": 2,
+      "spd": 2,
+      "arrows": null,
+      "effect": "该单位可以化作相邻单位的建造进度，点数等于其剩余生命值。",
+      "desc": null,
+      "uid": 60,
+      "_id": "c_1779256011341"
     }
   ],
   "overrides": {
