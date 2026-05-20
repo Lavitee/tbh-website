@@ -467,6 +467,24 @@
       "desc": null,
       "uid": 61,
       "_id": "c_1779256116059"
+    },
+    {
+      "zh": "米拉-10K",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Legendary",
+      "faction": "machine",
+      "collect": "InitHero",
+      "cost": "hero",
+      "race": null,
+      "atk": 0,
+      "hp": 20,
+      "spd": 1,
+      "arrows": "W",
+      "effect": "[⭐星能] 1",
+      "desc": null,
+      "uid": 62,
+      "_id": "c_1779294970807"
     }
   ],
   "overrides": {
