@@ -50,6 +50,22 @@
       "arrows": null,
       "effect": "Expend: Destroy a monster in his 5x5 adjacent area. (Refresh at the start of 4/7/11-th turn.)",
       "desc": null
+    },
+    "b1": {
+      "zh": "星际佣兵",
+      "en": "Space Soldier",
+      "type": "Minion",
+      "rarity": "Common",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 0,
+      "race": null,
+      "atk": 2,
+      "hp": 2,
+      "spd": 2,
+      "arrows": null,
+      "effect": "[可升级] 星际老兵",
+      "desc": "The most commonly seen space soldiers."
     }
   },
   "cardImages": {
