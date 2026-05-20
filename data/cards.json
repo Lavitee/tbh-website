@@ -449,6 +449,24 @@
       "desc": null,
       "uid": 60,
       "_id": "c_1779256011341"
+    },
+    {
+      "zh": "帝国特种兵",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Rare",
+      "faction": "astra",
+      "collect": "Collectable",
+      "cost": 4,
+      "race": null,
+      "atk": 4,
+      "hp": 4,
+      "spd": 4,
+      "arrows": "NW,SE",
+      "effect": "[箭头需求] 2",
+      "desc": null,
+      "uid": 61,
+      "_id": "c_1779256116059"
     }
   ],
   "overrides": {
