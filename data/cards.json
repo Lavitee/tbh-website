@@ -406,10 +406,10 @@
       "cost": 4,
       "race": "建筑",
       "atk": null,
-      "hp": 4,
+      "hp": 3,
       "spd": null,
       "arrows": "NW,NE",
-      "effect": null,
+      "effect": "该单位的箭头只能用于 放置/建造 非建筑随从。\n其箭头可以当作 X/2+1 个箭头来使用（X为该单位拥有的电能）。",
       "desc": null,
       "uid": 58,
       "_id": "c_1779255099025"
