@@ -386,11 +386,11 @@
       "faction": "neutral",
       "collect": "InitHero",
       "cost": "hero",
-      "race": "Human",
+      "race": null,
       "atk": 1,
       "hp": 20,
       "spd": 2,
-      "arrows": null,
+      "arrows": "N,NE",
       "effect": "[限定] Destroy a monster in his 5x5 adjacent area. (Refresh at the start of 4/7/11-th turn.)",
       "desc": null
     },
