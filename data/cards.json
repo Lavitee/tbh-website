@@ -461,6 +461,22 @@
       "arrows": null,
       "effect": "[耐久度] Durability (2)",
       "desc": "A noob soldier who's gonna die after 3 fights."
+    },
+    "b16": {
+      "zh": "阳炎聚能",
+      "en": "Sunfire Gathering",
+      "type": "Spell",
+      "rarity": "Common",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 0,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "E",
+      "effect": "[入场] Gain 2 Charge. [可升级] 火箭动力 / 射击模式",
+      "desc": "Gather the energy from the sun."
     }
   },
   "cardImages": {
