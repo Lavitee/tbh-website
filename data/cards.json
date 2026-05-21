@@ -228,7 +228,7 @@
       "atk": null,
       "hp": null,
       "spd": null,
-      "arrows": "NW,W,SW,S,SE,E,NE,N",
+      "arrows": null,
       "effect": "拾取：获得 1 点星能。",
       "desc": "拾取：获得 1 点星能。",
       "uid": 49,
