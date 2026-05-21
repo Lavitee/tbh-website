@@ -2883,7 +2883,7 @@ details[open] .race-summary::before { content: "▼ "; }
   display: grid;
   grid-template-columns: repeat(auto-fill, 172px);
   gap: 14px;
-  justify-content: center;
+  justify-content: start;
 }
 
 /* 法术牌 */
