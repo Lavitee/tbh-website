@@ -2693,25 +2693,47 @@ details[open] .race-summary::before { content: "▼ "; }
   );
 }
 
-/* 左上角费用 */
+/* 左上角费用 — 单位牌： LoR 斜切角方块 */
 .lor-cost {
   position: absolute;
   top: 8px;
   left: 8px;
   z-index: 4;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid;
-  background: rgba(6,8,18,0.82);
+  width: 34px;
+  height: 34px;
   display: grid;
   place-items: center;
-  font-size: 15px;
+  font-size: 19px;
   font-weight: 900;
-  backdrop-filter: blur(6px);
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+  background: rgba(6,8,18,0.92);
+  clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+  box-shadow: 2px 2px 0 color-mix(in srgb, var(--card-accent) 50%, #000);
 }
 
-.lor-cost-hero { font-size: 11px; }
+.lor-cost::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--card-accent) 80%, #fff) 0%,
+    color-mix(in srgb, var(--card-accent) 25%, #000) 100%);
+  z-index: -1;
+}
+
+.lor-cost-hero {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  text-shadow:
+    0 0 8px rgba(255,199,102,0.9),
+    0 0 20px rgba(255,199,102,0.5),
+    0 1px 2px rgba(0,0,0,0.9);
+  -webkit-text-stroke: 0.5px rgba(255,199,102,0.6);
+}
 
 /* 右上角箭头 */
 .lor-arrows {
@@ -3055,26 +3077,45 @@ details[open] .race-summary::before { content: "▼ "; }
   );
 }
 
-/* 法术牌费用 */
+/* 法术牌费用： LoR 风格斜切角方块 */
 .spell-cost {
   position: absolute;
   top: 8px;
   left: 8px;
   z-index: 4;
-  width: 30px;
-  height: 30px;
-  border-radius: 4px;
-  border: 2px solid;
-  background: rgba(6,8,18,0.85);
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 900;
-  backdrop-filter: blur(6px);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  width: 34px;
-  height: 34px;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+  background: rgba(6,8,18,0.88);
+  clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+  border: none;
+  transform: none;
+  box-shadow: none;
 }
+
+.spell-cost::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--card-accent) 70%, #fff) 0%,
+    color-mix(in srgb, var(--card-accent) 30%, #000) 100%);
+  z-index: -1;
+  margin: -2px;
+}
+
+.lor-card .lor-cost.lor-cost-hero::before,
+.spell-card .spell-cost.lor-cost-hero::before {
+  background: linear-gradient(135deg, #ffd966 0%, #b8860b 100%);
+}
+
+
 
 /* 法术牌箭头 */
 .spell-arrows {
