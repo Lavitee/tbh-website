@@ -1,24 +1,6 @@
 {
   "customCards": [
     {
-      "zh": "蒋",
-      "en": "tommy",
-      "type": "Minion",
-      "rarity": "Legendary",
-      "faction": "neutral",
-      "collect": "Collectable",
-      "cost": 10,
-      "race": null,
-      "atk": null,
-      "hp": null,
-      "spd": null,
-      "arrows": "N,NE",
-      "effect": null,
-      "desc": null,
-      "uid": 36,
-      "_id": "c_1779129180006"
-    },
-    {
       "zh": "寻宝海盗",
       "en": "Treasure-Hunting Pirates",
       "type": "Minion",
