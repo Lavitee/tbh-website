@@ -1020,23 +1020,21 @@ async function renderCardGrid() {
       <div class="${isSpell ? 'spell-card' : 'lor-card'}" style="--card-accent:${meta.accent}" data-rarity="${c.rarity}" data-card-id="${c._id}">
 
           ${isSpell ? `
-          <div class="spell-bg" data-upload-id="${c._id}">
+          <div class="lor-bg" data-upload-id="${c._id}">
             ${cardImg ? `<img src="${cardImg}" alt="${c.zh}" />` : ""}
-            <div class="spell-bg-rune"></div>
             <div class="lor-bg-upload-hint">📷 上传图片</div>
           </div>
           <div class="card-edit-zone" data-edit-id="${c._id}">✏ 编辑</div>
-          <div class="spell-shade"></div>
-          <div class="spell-cost ${isHero?'lor-cost-hero':''}" style="border-color:${meta.accent};color:${meta.accent}">${costStr}</div>
-          ${arrowDisplay ? `<div class="spell-arrows">${arrowDisplay}</div>` : ""}
-          <div class="spell-content">
-            <div class="spell-name-row">
-              <span class="spell-glyph" style="color:${meta.accent}">✶</span>
-              <span class="spell-name">${c.zh}</span>
-              <span class="spell-glyph" style="color:${meta.accent}">✶</span>
+          <div class="lor-shade"></div>
+          <div class="lor-cost ${isHero?'lor-cost-hero':''}" style="border-color:${meta.accent};color:${meta.accent}">${costStr}</div>
+          ${arrowDisplay ? `<div class="lor-arrows">${arrowDisplay}</div>` : ""}
+          <div class="lor-content">
+            <div class="lor-name-bar"><span class="lor-name">${c.zh}</span></div>
+            <div class="lor-tags-bar">
+              <span class="lor-tags-left">${meta.zh}</span>
+              <span class="lor-tags-right">法术</span>
             </div>
-            <div class="spell-tags">${tags}</div>
-            ${c.effect ? `<div class="spell-effect">${renderCardEffect(c.effect)}</div>` : ''}
+            ${c.effect ? `<div class="lor-effect-bar"><p class="lor-effect">${renderCardEffect(c.effect)}</p></div>` : ''}
           </div>` : `
 
           <div class="lor-bg" data-upload-id="${c._id}">
@@ -1051,7 +1049,7 @@ async function renderCardGrid() {
             <div class="lor-name-bar"><span class="lor-name">${c.zh}</span></div>
             <div class="lor-tags-bar">
               <span class="lor-tags-left">${meta.zh}</span>
-              <span class="lor-tags-right">${c.race || (c.collect === "Uncollectable" ? "Token" : "")}</span>
+              <span class="lor-tags-right">${c.race || (c.collect === 'Uncollectable' ? 'Token' : '')}</span>
             </div>
             ${c.effect ? `<div class="lor-effect-bar"><p class="lor-effect">${renderCardEffect(c.effect)}</p></div>` : ""}
             <div class="lor-stats-bar">
