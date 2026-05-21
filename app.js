@@ -661,7 +661,11 @@ async function getFilteredCards() {
   const all = await getMergedCards();
   const filtered = all.filter((c) => {
     if (cardFilters.faction !== "all" && c.faction !== cardFilters.faction) return false;
-    if (cardFilters.type    !== "all" && c.type.toLowerCase() !== cardFilters.type) return false;
+    if (cardFilters.type === "hero") {
+      if (c.collect !== "InitHero") return false;
+    } else if (cardFilters.type !== "all") {
+      if (c.type.toLowerCase() !== cardFilters.type) return false;
+    }
     if (cardFilters.rarity  !== "all" && c.rarity.toLowerCase() !== cardFilters.rarity) return false;
     if (cardSearchQuery) {
       const q = cardSearchQuery.toLowerCase();
@@ -1026,7 +1030,7 @@ async function renderCardGrid() {
           </div>
           <div class="card-edit-zone" data-edit-id="${c._id}">✏ 编辑</div>
           <div class="lor-shade"></div>
-          <div class="lor-cost ${isHero?'lor-cost-hero':''}" style="border-color:${meta.accent};color:${meta.accent}">${costStr}</div>
+          <div class="spell-cost ${isHero?'lor-cost-hero':''}" style="border-color:${meta.accent};color:${meta.accent}"><span>${costStr}</span></div>
           ${arrowDisplay ? `<div class="lor-arrows">${arrowDisplay}</div>` : ""}
           <div class="lor-content">
             <div class="lor-name-bar"><span class="lor-name">${c.zh}</span></div>
@@ -1235,7 +1239,7 @@ async function deleteCard(cardId) {
 function renderCardFilters() {
   const panel = document.querySelector("#cardFilterPanel");
   const factionRows = [{ key:"all", zh:"全部势力", en:"All" }, ...Object.entries(cardFactionMeta).map(([k,v]) => ({ key:k, zh:v.zh, en:v.en }))];
-  const typeRows    = [{ key:"all", zh:"全部类型", en:"All" }, { key:"minion", zh:"随从", en:"Minion" }, { key:"spell", zh:"法术", en:"Spell" }];
+  const typeRows    = [{ key:"all", zh:"全部类型", en:"All" }, { key:"minion", zh:"随从", en:"Minion" }, { key:"spell", zh:"法术", en:"Spell" }, { key:"hero", zh:"英雄", en:"Hero" }];
   const rarityRows  = [{ key:"all", zh:"全部稀有度", en:"All" }, { key:"common", zh:"Common", en:"Common" }, { key:"rare", zh:"Rare", en:"Rare" }, { key:"epic", zh:"Epic", en:"Epic" }, { key:"legendary", zh:"Legendary", en:"Legendary" }];
   const buildRow = (label, items, filterKey) => {
     const btns = items.map((item) => `
