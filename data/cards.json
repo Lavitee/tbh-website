@@ -602,7 +602,8 @@
   "cardImages": {
     "b0": "https://raw.githubusercontent.com/Lavitee/tbh-website/main/data/images/card-b0.jpg",
     "b1": "https://raw.githubusercontent.com/Lavitee/tbh-website/main/data/images/card-b1.jpg",
-    "b2": "https://raw.githubusercontent.com/Lavitee/tbh-website/main/data/images/card-b2.jpg"
+    "b2": "https://raw.githubusercontent.com/Lavitee/tbh-website/main/data/images/card-b2.jpg",
+    "b3": "https://raw.githubusercontent.com/Lavitee/tbh-website/main/data/images/card-b3.jpg"
   },
   "customRaces": [
     "Pirate",
