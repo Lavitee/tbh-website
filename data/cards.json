@@ -326,7 +326,7 @@
     },
     {
       "zh": "空亡时主",
-      "en": "",
+      "en": null,
       "type": "Minion",
       "rarity": "Legendary",
       "faction": "neutral",
