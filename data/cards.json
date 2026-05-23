@@ -485,6 +485,24 @@
       "desc": null,
       "uid": 36,
       "_id": "c_1779508005747"
+    },
+    {
+      "zh": "械心飞升",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Legendary",
+      "faction": "machine",
+      "collect": "Collectable",
+      "cost": 4,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "NW",
+      "effect": "[入场] 你的英雄每回合额外提供1点[⭐星能]",
+      "desc": null,
+      "uid": 63,
+      "_id": "c_1779508105296"
     }
   ],
   "overrides": {
