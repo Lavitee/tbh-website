@@ -647,6 +647,24 @@
       "desc": null,
       "uid": 71,
       "_id": "c_1779509808218"
+    },
+    {
+      "zh": "小机器人-突击型",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Rare",
+      "faction": "machine",
+      "collect": "Collectable",
+      "cost": 0,
+      "race": null,
+      "atk": 0,
+      "hp": 2,
+      "spd": 5,
+      "arrows": null,
+      "effect": "该随从的攻击力等同于你其他小机器人的数量。",
+      "desc": null,
+      "uid": 72,
+      "_id": "c_1779509979484"
     }
   ],
   "overrides": {
