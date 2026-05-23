@@ -737,6 +737,24 @@
       "desc": null,
       "uid": 76,
       "_id": "c_1779510623366"
+    },
+    {
+      "zh": "能量膜",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Common",
+      "faction": "neutral",
+      "collect": "Uncollectable",
+      "cost": null,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": null,
+      "effect": "[拾取] 获得1点护甲",
+      "desc": null,
+      "uid": 77,
+      "_id": "c_1779510652931"
     }
   ],
   "overrides": {
