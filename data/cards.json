@@ -539,6 +539,24 @@
       "desc": null,
       "uid": 65,
       "_id": "c_1779508560294"
+    },
+    {
+      "zh": "强化防壁",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Rare",
+      "faction": "machine",
+      "collect": "Collectable",
+      "cost": 2,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "NE",
+      "effect": "[指令] 获得4能量护盾。",
+      "desc": null,
+      "uid": 66,
+      "_id": "c_1779508750103"
     }
   ],
   "overrides": {
