@@ -503,6 +503,24 @@
       "desc": null,
       "uid": 63,
       "_id": "c_1779508105296"
+    },
+    {
+      "zh": "你好世界",
+      "en": "Helloworld",
+      "type": "Spell",
+      "rarity": "Rare",
+      "faction": "machine",
+      "collect": "Collectable",
+      "cost": 0,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "N",
+      "effect": "发动：一回合一次，触发该卡牌⬆️方的[指令]效果",
+      "desc": null,
+      "uid": 64,
+      "_id": "c_1779508241830"
     }
   ],
   "overrides": {
