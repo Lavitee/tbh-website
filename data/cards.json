@@ -521,6 +521,24 @@
       "desc": null,
       "uid": 64,
       "_id": "c_1779508241830"
+    },
+    {
+      "zh": "快速调试",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Rare",
+      "faction": "machine",
+      "collect": "Collectable",
+      "cost": 3,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "S",
+      "effect": "[入场] 执行该卡牌下方的[指令]",
+      "desc": null,
+      "uid": 65,
+      "_id": "c_1779508560294"
     }
   ],
   "overrides": {
