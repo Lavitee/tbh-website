@@ -755,6 +755,24 @@
       "desc": null,
       "uid": 77,
       "_id": "c_1779510652931"
+    },
+    {
+      "zh": "美味的野果",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Common",
+      "faction": "neutral",
+      "collect": "Uncollectable",
+      "cost": null,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": null,
+      "effect": "[拾取] 拾取的单位恢复2点生命，本回合内获得额外2点移动力。",
+      "desc": null,
+      "uid": 78,
+      "_id": "c_1779510756916"
     }
   ],
   "overrides": {
