@@ -751,7 +751,7 @@
       "hp": null,
       "spd": null,
       "arrows": null,
-      "effect": "[拾取] 获得1点护甲",
+      "effect": "[拾取] 获得1点护甲。",
       "desc": null,
       "uid": 77,
       "_id": "c_1779510652931"
