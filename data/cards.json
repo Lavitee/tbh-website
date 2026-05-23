@@ -773,6 +773,24 @@
       "desc": null,
       "uid": 78,
       "_id": "c_1779510756916"
+    },
+    {
+      "zh": "工程机器人",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Rare",
+      "faction": "astra",
+      "collect": "Collectable",
+      "cost": 5,
+      "race": "Mech",
+      "atk": 0,
+      "hp": 4,
+      "spd": 3,
+      "arrows": "N,W,S,E",
+      "effect": "该单位的箭头只能用于建造未完成的单位。\n若该单位电能不小于3，其每个箭头可以当作两个使用。",
+      "desc": null,
+      "uid": 79,
+      "_id": "c_1779510986966"
     }
   ],
   "overrides": {
