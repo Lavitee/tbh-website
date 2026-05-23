@@ -701,6 +701,24 @@
       "desc": null,
       "uid": 74,
       "_id": "c_1779510400417"
+    },
+    {
+      "zh": "遗失的智慧",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Common",
+      "faction": "neutral",
+      "collect": "Uncollectable",
+      "cost": null,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": null,
+      "effect": "[拾取] 获得1点星能。",
+      "desc": null,
+      "uid": 75,
+      "_id": "c_1779510587383"
     }
   ],
   "overrides": {
