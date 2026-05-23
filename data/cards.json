@@ -575,6 +575,24 @@
       "desc": null,
       "uid": 67,
       "_id": "c_1779508816502"
+    },
+    {
+      "zh": "小机器人",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Common",
+      "faction": "machine",
+      "collect": "Collectable",
+      "cost": 0,
+      "race": "Mech",
+      "atk": 1,
+      "hp": 1,
+      "spd": 1,
+      "arrows": "W",
+      "effect": "该随从的箭头仅能用于放置小机器人。",
+      "desc": null,
+      "uid": 68,
+      "_id": "c_1779509266516"
     }
   ],
   "overrides": {
