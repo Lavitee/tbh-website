@@ -791,6 +791,24 @@
       "desc": null,
       "uid": 79,
       "_id": "c_1779510986966"
+    },
+    {
+      "zh": "烬白",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Legendary",
+      "faction": "machine",
+      "collect": "Collectable",
+      "cost": null,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": null,
+      "effect": null,
+      "desc": null,
+      "uid": 80,
+      "_id": "c_1779597972182"
     }
   ],
   "overrides": {
