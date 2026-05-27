@@ -905,7 +905,7 @@
       "hp": null,
       "spd": null,
       "arrows": "E",
-      "effect": "[入场] Gain 4 Charge. You may spend charges to conduct extra moves of your Mech minions.",
+      "effect": "[入场] 获得4点充能。你可以消耗你的充能来令你的机械进行额外的移动。",
       "desc": null
     },
     "b25": {
