@@ -1081,13 +1081,13 @@
       "_id": "c_1779900931831"
     },
     {
-      "zh": "火焰雨",
+      "zh": "太阳雨",
       "en": null,
       "type": "Spell",
       "rarity": "Rare",
       "faction": "solar",
       "collect": "Collectable",
-      "cost": 0,
+      "cost": 3,
       "race": null,
       "atk": null,
       "hp": null,
