@@ -863,6 +863,24 @@
       "desc": null,
       "uid": 83,
       "_id": "c_1779865472606"
+    },
+    {
+      "zh": "义体召唤",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Common",
+      "faction": "machine",
+      "collect": "Collectable",
+      "cost": 4,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "NW",
+      "effect": "[指令] 从你的牌堆将两只小机器人召唤至你英雄的↖️⬆️位置。",
+      "desc": null,
+      "uid": 84,
+      "_id": "c_1779865575691"
     }
   ],
   "overrides": {
