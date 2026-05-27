@@ -971,6 +971,24 @@
       "desc": null,
       "uid": 89,
       "_id": "c_1779866914657"
+    },
+    {
+      "zh": "魔法釜人偶",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Epic",
+      "faction": "solar",
+      "collect": "Collectable",
+      "cost": 2,
+      "race": "Mech",
+      "atk": 0,
+      "hp": 1,
+      "spd": 1,
+      "arrows": "SE",
+      "effect": "每当其受到魔法伤害时，将伤害转化为等量的充能。",
+      "desc": null,
+      "uid": 90,
+      "_id": "c_1779867129808"
     }
   ],
   "overrides": {
