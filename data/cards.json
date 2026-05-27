@@ -1007,6 +1007,24 @@
       "desc": null,
       "uid": 91,
       "_id": "c_1779867370991"
+    },
+    {
+      "zh": "阿蕾缇娅-超新星",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Legendary",
+      "faction": "solar",
+      "collect": "Uncollectable",
+      "cost": null,
+      "race": null,
+      "atk": 3,
+      "hp": 9,
+      "spd": 3,
+      "arrows": "NE,SE,E",
+      "effect": "[入场] 选择一名目标，造成4点伤害，你每控制一个其他的超新星形态的随从，重复一次。",
+      "desc": null,
+      "uid": 92,
+      "_id": "c_1779899597205"
     }
   ],
   "overrides": {
