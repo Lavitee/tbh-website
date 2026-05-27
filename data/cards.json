@@ -971,6 +971,22 @@
       "arrows": "N",
       "effect": "发动：每回合限一次，从弃牌堆召唤两个星际佣兵，放置于其↖️↗️方向。",
       "desc": null
+    },
+    "b7": {
+      "zh": "鲁莽的先锋",
+      "en": "Reckless Pioneer",
+      "type": "Minion",
+      "rarity": "Rare",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 5,
+      "race": null,
+      "atk": 5,
+      "hp": 2,
+      "spd": 5,
+      "arrows": "NE",
+      "effect": "发动：每回合限一次，获得3能量护盾。",
+      "desc": "A rushing soldier whose energy shield is not even ready."
     }
   },
   "cardImages": {
