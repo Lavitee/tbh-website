@@ -1051,6 +1051,22 @@
       "arrows": "W",
       "effect": "[入场] 获得7[⭐星能]。",
       "desc": "A treasure ore that provides the star energy."
+    },
+    "b17": {
+      "zh": "瞬发火箭弹",
+      "en": "Instant Rocket",
+      "type": "Spell",
+      "rarity": "Rare",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 3,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "NW",
+      "effect": "发动：对一个3x3区域内的全部敌人造成2点伤害，该火箭弹每飞行4格距离需要消耗1充能。",
+      "desc": null
     }
   },
   "cardImages": {
