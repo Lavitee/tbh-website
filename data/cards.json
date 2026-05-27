@@ -1097,6 +1097,24 @@
       "desc": null,
       "uid": 96,
       "_id": "c_1779901059465"
+    },
+    {
+      "zh": "燃魂学徒",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Rare",
+      "faction": "solar",
+      "collect": "Collectable",
+      "cost": 1,
+      "race": null,
+      "atk": 1,
+      "hp": 2,
+      "spd": 1,
+      "arrows": null,
+      "effect": "发动：每回合限一次，将3点伤害分配给任意友方单位。",
+      "desc": null,
+      "uid": 97,
+      "_id": "c_1779901236832"
     }
   ],
   "overrides": {
