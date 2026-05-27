@@ -1027,13 +1027,13 @@
       "rarity": "Rare",
       "faction": "neutral",
       "collect": "Collectable",
-      "cost": 3,
+      "cost": 4,
       "race": null,
       "atk": null,
       "hp": null,
       "spd": null,
       "arrows": "W",
-      "effect": "[入场] 获得3[⭐星能]。[可升级] 宝藏星能石。",
+      "effect": "[入场] 获得4[⭐星能]。[可升级] 宝藏星能石。",
       "desc": "A rare ore that provides the star energy."
     }
   },
