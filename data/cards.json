@@ -1083,6 +1083,22 @@
       "arrows": "S",
       "effect": "[入场] 获得2能量护盾。[可升级]前线防护罩。",
       "desc": null
+    },
+    "b19": {
+      "zh": "前线防护罩",
+      "en": "Frontline Shield",
+      "type": "Spell",
+      "rarity": "Rare",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 4,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "SE,SW",
+      "effect": "[入场] 获得6能量护盾。",
+      "desc": null
     }
   },
   "cardImages": {
