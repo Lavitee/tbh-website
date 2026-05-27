@@ -1019,6 +1019,22 @@
       "arrows": "W",
       "effect": "[入场] 获得1[⭐星能]。[可升级] 稀有星能石。",
       "desc": "An ore that provides the star energy."
+    },
+    "b14": {
+      "zh": "稀有星能石",
+      "en": "Rare Star Ore",
+      "type": "Spell",
+      "rarity": "Rare",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 3,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "W",
+      "effect": "[入场] 获得3[⭐星能]。[可升级] 宝藏星能石。",
+      "desc": "A rare ore that provides the star energy."
     }
   },
   "cardImages": {
