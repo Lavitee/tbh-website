@@ -1131,6 +1131,22 @@
       "arrows": "E",
       "effect": "[入场] 抽两张牌。",
       "desc": null
+    },
+    "b22": {
+      "zh": "放逐太空",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Epic",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 2,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "W",
+      "effect": "[入场] 移除一张手牌以抽一张牌。",
+      "desc": null
     }
   },
   "cardImages": {
