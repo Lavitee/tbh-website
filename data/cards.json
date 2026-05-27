@@ -1043,6 +1043,24 @@
       "desc": null,
       "uid": 93,
       "_id": "c_1779899690591"
+    },
+    {
+      "zh": "阳炎信徒-超新星",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Common",
+      "faction": "solar",
+      "collect": "Uncollectable",
+      "cost": 0,
+      "race": null,
+      "atk": 3,
+      "hp": 3,
+      "spd": 3,
+      "arrows": null,
+      "effect": "该随从3x3范围内的所有友方单位产出的充能数值+。",
+      "desc": null,
+      "uid": 94,
+      "_id": "c_1779900093009"
     }
   ],
   "overrides": {
