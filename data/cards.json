@@ -1097,7 +1097,7 @@
       "hp": null,
       "spd": null,
       "arrows": "SE,SW",
-      "effect": "[入场] 获得6能量护盾。",
+      "effect": "[入场] 获得6能量护盾。[可升级]行星防护罩。",
       "desc": null
     },
     "b20": {
