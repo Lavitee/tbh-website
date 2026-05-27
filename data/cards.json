@@ -1067,6 +1067,22 @@
       "arrows": "NW",
       "effect": "发动：对一个3x3区域内的全部敌人造成2点伤害，该火箭弹每飞行4格距离需要消耗1充能。",
       "desc": null
+    },
+    "b18": {
+      "zh": "防护罩",
+      "en": "Energy Shield",
+      "type": "Spell",
+      "rarity": "Common",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 0,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "S",
+      "effect": "[入场] 获得2能量护盾。",
+      "desc": null
     }
   },
   "cardImages": {
