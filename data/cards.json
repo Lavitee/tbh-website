@@ -1025,6 +1025,24 @@
       "desc": null,
       "uid": 92,
       "_id": "c_1779899597205"
+    },
+    {
+      "zh": "超新星决议",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Legendary",
+      "faction": "solar",
+      "collect": "Uncollectable",
+      "cost": 10,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": null,
+      "effect": "[入场] 本局游戏中己方随从[超新星]变身所需的充能消耗-1，该卡所在的格子每拥有一个箭头指向，重复一次。",
+      "desc": null,
+      "uid": 93,
+      "_id": "c_1779899690591"
     }
   ],
   "overrides": {
