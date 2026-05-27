@@ -1061,6 +1061,24 @@
       "desc": null,
       "uid": 91,
       "_id": "c_1779900857912"
+    },
+    {
+      "zh": "魔法练习人偶",
+      "en": null,
+      "type": "Minion",
+      "rarity": "Rare",
+      "faction": "solar",
+      "collect": "Collectable",
+      "cost": 2,
+      "race": "Mech",
+      "atk": 0,
+      "hp": 1,
+      "spd": 1,
+      "arrows": "NW",
+      "effect": null,
+      "desc": null,
+      "uid": 95,
+      "_id": "c_1779900931831"
     }
   ],
   "overrides": {
