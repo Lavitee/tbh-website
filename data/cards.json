@@ -917,6 +917,24 @@
       "desc": null,
       "uid": 86,
       "_id": "c_1779866272139"
+    },
+    {
+      "zh": "祈光",
+      "en": null,
+      "type": "Spell",
+      "rarity": "Rare",
+      "faction": "solar",
+      "collect": "Collectable",
+      "cost": 2,
+      "race": null,
+      "atk": null,
+      "hp": null,
+      "spd": null,
+      "arrows": "NE",
+      "effect": "发动：你每个友方随从，为你提供1充能。",
+      "desc": null,
+      "uid": 87,
+      "_id": "c_1779866420005"
     }
   ],
   "overrides": {
