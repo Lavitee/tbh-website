@@ -987,6 +987,22 @@
       "arrows": "NE",
       "effect": "发动：每回合限一次，获得3能量护盾。",
       "desc": "A rushing soldier whose energy shield is not even ready."
+    },
+    "b8": {
+      "zh": "日炎火炮手",
+      "en": "Sunfire Cannoneer",
+      "type": "Minion",
+      "rarity": "Common",
+      "faction": "neutral",
+      "collect": "Collectable",
+      "cost": 1,
+      "race": null,
+      "atk": 1,
+      "hp": 3,
+      "spd": 2,
+      "arrows": null,
+      "effect": "发动：每回合限两次，消耗1充能，对线性范围内的一名敌人造成1伤害。",
+      "desc": "A ranged unit that consumes energy charge to fire at enemies."
     }
   },
   "cardImages": {
