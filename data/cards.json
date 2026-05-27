@@ -1081,7 +1081,7 @@
       "hp": null,
       "spd": null,
       "arrows": "S",
-      "effect": "[入场] 获得2能量护盾。",
+      "effect": "[入场] 获得2能量护盾。[可升级]前线防护罩。",
       "desc": null
     }
   },
