@@ -931,13 +931,13 @@
       "rarity": "Common",
       "faction": "neutral",
       "collect": "Collectable",
-      "cost": 0,
+      "cost": 2,
       "race": null,
       "atk": null,
       "hp": null,
       "spd": null,
       "arrows": "N",
-      "effect": "Once per turn OnCast: Deal 2 damage to an enemy in a straight line.",
+      "effect": "发动：对一个线性范围内的敌人造成2点伤害。",
       "desc": "A flying bullet."
     },
     "b3": {
